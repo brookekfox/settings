@@ -38,6 +38,8 @@ alias grep='grep --color=auto'
 function grepe {
   grep --color -E "$1|$" $2
 }
+export GREP_OPTIONS='--color=always'
+export GREP_COLOR='1;4;32'
 
 # refresh shell
 alias reload='source ~/.bash_profile'
