@@ -1,0 +1,3 @@
+[submodule "atom-settings"]
+	path = atom-settings
+	url = https://github.com/brookekfox/atom-settings
