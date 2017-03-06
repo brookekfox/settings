@@ -33,13 +33,12 @@ alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 # external ip
 alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
-# grep with color
-alias grep='grep --color=auto'
+# grep with color, options
 function grepe {
   grep --color -E "$1|$" $2
 }
 export GREP_OPTIONS='--color=always'
-export GREP_COLOR='1;4;32'
+export GREP_COLOR='1;7;35'
 
 # refresh shell
 alias reload='source ~/.bash_profile'
