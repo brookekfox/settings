@@ -9,15 +9,14 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 # Include git branch in prompt
-# full filepath
-PS1='[\[\033[0;36m\]\A\[\033[0m\] \[\033[0;35m\]\w\[\033[0m\]\[\033[0;32m\]$(__git_ps1 " (%s)")\[\033[0m\]]\$ '
-# current directory
+# time fullPath (name of current branch)
+PS1='[\A \[\033[0;32m\]\w\[\033[0m\]\[\033[0;35m\]$(__git_ps1 " (%s)")\[\033[0m\]]\$ '
+# time currentDirectory (name of current branch)
 # PS1='[\[\033[0;36m\]\A\[\033[0m\] \[\033[0;35m\]\W\[\033[0m\]\[\033[0;32m\]$(__git_ps1 " (%s)")\[\033[0m\]]\$ '
 
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-#alias ls='ls -GFh'
 alias ls='ls -Ga'
 alias ll='ls -lGa'
 export CLICOLOR=1
