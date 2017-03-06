@@ -1,3 +1,5 @@
 #### Settings
 
-* Including gitconfig, Atom settings, bash profile, etc.
+* gitconfig
+* Atom settings
+* bash profile
