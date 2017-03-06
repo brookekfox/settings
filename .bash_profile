@@ -11,18 +11,47 @@ fi
 # Include git branch in prompt
 PS1='[\t \W$(__git_ps1 " (%s)")]\$ '
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 #alias ls='ls -GFh'
-alias ls='ls -G'
+alias ls='ls -Ga'
 alias ll='ls -lGa'
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
 
+# up 'n' folders
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# simple ip
+alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2'
+# more details
+alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+# external ip
+alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
+
+# grep with color
+alias grep='grep --color=auto'
+function grepe {
+  grep --color -E "$1|$" $2
+}
+
+# refresh shell
+alias reload='source ~/.bash_profile'
+
+# git aliases
 alias goto='git checkout '
 alias gd='git diff'
 alias gb='git branch '
 alias gc='git commit -m '
 alias gs='git status'
 alias gf='git fetch --all'
+# Show dirty state in prompt when in Git repos
+export GIT_PS1_SHOWDIRTYSTATE=1
+
 alias build='sh build.sh'
 
 export PATH=/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:$PATH
