@@ -34,7 +34,10 @@ alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
 # grep with color, options
+# usage: grep "brooke" FILEPATH
+#        grepe "brooke" FILEPATH
 function grepe {
+  # prints whole file with matching text highlighted
   grep --color -E "$1|$" $2
 }
 export GREP_OPTIONS='--color=always'
