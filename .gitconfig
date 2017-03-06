@@ -1,0 +1,67 @@
+# colors: normal, black, red, green, yellow, blue, magenta, cyan, white
+# attributes: bold, dim, ul (underline), blink, reverse (swap foreground and background)
+
+# green  = 34
+# orange = 166
+# pink   = 163
+# purple = 55
+# yellow = 11
+# red    = 9
+
+[color]
+  branch      = true
+  diff        = true
+  status      = true
+  interactive = true
+  showbranch  = true
+  ui          = true
+
+[color "status"]
+  added     = 34
+  changed   = 166 bold
+  untracked = 34 bold
+
+[color "branch"]
+  remote  = cyan bold
+  local   = 163 bold
+  current = 34 bold
+
+[color "diff"]
+  frag = cyan bold
+  meta = 55 bold
+  old  = red bold
+  new  = 34 bold
+
+[log]
+  # date = short
+
+[github]
+  user = brookekfox
+
+[alias]
+  branch-name = "!git rev-parse --abbrev-ref HEAD"
+  branches    = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+  aliases     = "!git config -l | grep alias | cut -c 7-"
+  st          = status
+  co          = checkout
+  cob         = checkout -b
+  cm          = commit -m
+  c           = commit
+  a           = add
+  aa          = add .
+  pom         = pull origin master
+  com         = checkout master
+  br          = branch
+  hist        = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  f           = fetch --all
+  up          = !git pull --rebase --prune $@ && git submodule update --init --recursive
+  smup        = submodule update --init --recursive
+  reset       = reset --hard
+  undo-commit = reset --soft HEAD~1
+  l           = log --pretty=format:"%C(55)%h\\ %ad%C(163)%d\\ %Creset%s%C(34)\\ [%cn]" --decorate --date=short
+  loll        = log --graph --decorate --pretty=oneline --abbrev-commit
+  one         = log --pretty=oneline
+  me          = log --author=\"Brooke Fox\"
+  files       = "!git diff --name-status master..$(git branch-name)" #show all files changed
+  dm          = diff master
+  wc          = whatchanged
