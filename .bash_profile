@@ -49,6 +49,7 @@ export GREP_COLOR='1;7;35'
 alias reload='source ~/.bash_profile'
 
 # git aliases
+alias gti='git ' # common typo
 alias goto='git checkout '
 alias gd='git diff'
 alias gb='git branch '
