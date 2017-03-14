@@ -47,6 +47,9 @@ export GREP_COLOR='1;7;35'
 
 # refresh shell
 alias reload='source ~/.bash_profile'
+# open files
+alias bashpro='atom ~/.bash_profile'
+alias gitconfig='atom ~/.gitconfig'
 
 # git aliases
 alias gti='git ' # common typo
