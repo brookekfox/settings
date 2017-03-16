@@ -23,7 +23,7 @@
 
 [color "branch"]
   remote  = cyan bold
-  local   = 163 bold
+  local   = 55
   current = 34 bold
 
 [color "diff"]
@@ -67,3 +67,4 @@
   dm           = diff master
   wc           = whatchanged
   pb           = "!git pull origin $(git branch-name)"
+  pb           = "!git fetch --all && git pull origin $(git branch-name)"
