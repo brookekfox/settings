@@ -66,5 +66,4 @@
   files        = "!git diff --name-status master..$(git branch-name)" #show all files changed from master
   dm           = diff master
   wc           = whatchanged
-  pb           = "!git pull origin $(git branch-name)"
   pb           = "!git fetch --all && git pull origin $(git branch-name)"
