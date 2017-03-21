@@ -67,3 +67,4 @@
   dm           = diff master
   wc           = whatchanged
   pb           = "!git fetch --all && git pull origin $(git branch-name)"
+  push         = "!git push origin $(git branch-name)"
