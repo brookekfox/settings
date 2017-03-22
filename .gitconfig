@@ -59,6 +59,7 @@
   smup         = submodule update --init --recursive
   reset        = reset --hard
   undo-commit  = reset --soft HEAD~1
+  combine      = "!git reset --soft HEAD && git commit" # combine all commits into a single commit
   l            = log --pretty=format:"%C(55)%h\\ %ad%C(163)%d\\ %Creset%s%C(34)\\ [%cn]" --decorate --date=short
   loll         = log --graph --decorate --pretty=oneline --abbrev-commit
   one          = log --pretty=oneline
