@@ -40,18 +40,22 @@
 
 [alias]
   branch-name  = "!git rev-parse --abbrev-ref HEAD"
-  branches     = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+  # branches     = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+  branches     = "git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
   aliases      = "!git config -l | grep alias | cut -c 7-"
   st           = status
   co           = checkout
   cob          = checkout -b
   cm           = commit -m
+  cmdev        = "!git commit -m 'updating submodule hash'"
+  cmb          = "!git commit -m 'updating submodule hash and rebuild'"
   c            = commit
   a            = add
   aa           = add .
   pom          = pull origin master
   com          = checkout master
   cof          = checkout -- #checkout file FILEPATH
+  cp           = cherry-pick
   br           = branch
   hist         = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   f            = fetch --all
@@ -63,9 +67,26 @@
   loll         = log --graph --decorate --pretty=oneline --abbrev-commit
   one          = log --pretty=oneline
   me           = log --author=\"Brooke Fox\"
-  files        = "!git diff --name-status $(git branch-name)..master" #show all files changed from master
   dm           = diff master
   wc           = whatchanged
-  update       = "!git pull origin $(git branch-name) && git fetch --all && git submodule update --init --recursive"
+  files        = diff --name-status master
+  u            = "!git pull origin $(git branch-name) && git fetch --all && git submodule update --init --recursive"
   pullbr       = "!git fetch --all && git pull origin $(git branch-name)"
-  pushbr       = "!git push origin $(git branch-name)"
+  update       = "!git fetch --all && git reset --hard origin/$(git branch-name)"
+  merge        = merge --no-ff
+  behind       = "!git rev-list --left-right --count master"
+
+[merge]
+  tool = kdiff3
+
+[diff]
+  tool = kdiff3
+
+[user]
+  name = Brooke Fox
+	email = brooke.fox@aofl.com
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
