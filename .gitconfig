@@ -73,6 +73,7 @@
   u            = "!git pull origin $(git branch-name) && git fetch --all && git submodule update --init --recursive"
   pullbr       = "!git fetch --all && git pull origin $(git branch-name)"
   update       = "!git fetch --all && git reset --hard origin/$(git branch-name)"
+  undo         = "!git reset --soft HEAD~1 && git reset HEAD"
   merge        = merge --no-ff
   behind       = "!git rev-list --left-right --count master"
 
@@ -86,7 +87,7 @@
   name = Brooke Fox
 	email = brooke.fox@aofl.com
 [filter "lfs"]
-	process = git-lfs filter-process
+	process = git-lfs filter-process --skip
 	required = true
 	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+	smudge = git-lfs smudge --skip %f
