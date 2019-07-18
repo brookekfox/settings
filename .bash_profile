@@ -23,7 +23,6 @@ fi
 # time fullPath (name of current branch)
 # PS1='\A \[\033[1;36m\]\w\[\033[0m\]\[\033[1;35m\] $(__git_ps1 " (%s)")\[\033[0m\]\$ '
 PS1='\A \[\033[1;36m\]\w\[\033[0m\]\[\033[1;35m\] $(__git_ps1 " (%s)")\[\033[0m\] ➝  '
-# PS1='\A \[\033[1;36m\]\w\[\033[0m\]\[\033[1;35m\] $(__git_ps1 " (%s)")\[\033[0m\]\n ☞  '
 
 # time currentDirectory (name of current branch)
 # PS1='[\[\033[0;36m\]\A\[\033[0m\] \[\033[0;35m\]\W\[\033[0m\]\[\033[0;32m\]$(__git_ps1 " (%s)")\[\033[0m\]]\$ '
@@ -62,6 +61,9 @@ alias gitconfig='atom ~/.gitconfig'
 # mysql
 alias mysqlstop='sudo mysqld stop'
 
+# create webp images from pngs
+alias convertwebp='for i in *.png; do convert "$i" "${i%.png}.webp" & done'
+
 # git aliases
 alias gti='git ' # common typo
 alias gtiu='git u' # common typo
@@ -86,11 +88,24 @@ alias emsjpserver='cd ~/aofl/ems.abcmouse.jp/ && aofljs-cli server -d -p 3001 -H
 alias parentwserver='cd ~/aofl/parent.abcmouse.tw/ && aofljs-cli server -d -p 3001 -H schools.localhost.abcmouse.com -m tw'
 alias build='aofljs-cli build -r -v'
 
+alias webserver='docker exec -it readingiq_private_web_server /bin/bash'
+alias lbtwebserver='docker exec -it library_tool_web_server /bin/bash'
+
+alias riq='cd ~/aofl/ReadingIq'
+alias riqprivate='cd ~/aofl/ReadingIq/ReadingIqPrivate'
+alias library='cd ~/aofl/ReadingIq/ReadingIqPrivate/www-data/ReadingIqServiceLibrary'
+alias layer='cd ~/aofl/ReadingIq/ReadingIqPrivate/www-data/ReadingIqServiceLayer'
+alias filecache='cd ~/aofl/ReadingIq/ReadingIqPrivate/ReadingIqFileCache'
+alias cdn='cd ~/aofl/ReadingIq/ReadingIqPrivate/ReadingIqCdn'
+alias sql='cd ~/aofl/ReadingIq/ReadingIqPrivate/ReadingIqSql'
+alias web='cd ~/aofl/ReadingIq/ReadingIqPrivate/private.readingiq.com'
+
 alias buildtw='aofljs-cli build-app ems_enterprise/ -o ems4/ -m tw'
 alias buildjp='aofljs-cli build-app schools_experience_jp/ -o globalschools/ -m jp'
 
 alias sandbox='ssh brooke.fox@brooke.fox.test.abcmouse.com'
 alias lbt='ssh lbt-dev.aofl.com'
+alias lbt2='ssh lbt2-dev.aofl.com'
 alias uninstallaofljs-cli='npm uninstall -g @aofl/aofljs-cli'
 alias 061install='npm i -g @aofl/aofljs-cli@0.6.1'
 alias 065install='npm i -g @aofl/aofljs-cli@0.6.5'
@@ -121,3 +136,7 @@ code () {
   fi
 }
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
