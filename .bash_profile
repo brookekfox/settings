@@ -79,49 +79,6 @@ alias copy-diff='git diff --name-only | pbcopy'
 # Show dirty state in prompt when in Git repos
 export GIT_PS1_SHOWDIRTYSTATE=1
 
-alias comserver='cd ~/aofl/schools.abcmouse.com/ && aofljs-cli server -d -p 3001 -H schools.localhost.com -m com'
-alias cnserver='cd ~/aofl/schools.abcmouse.cn/ && aofljs-cli server -d -p 3001 -H schools.localhost.com -m cn'
-alias jpserver='cd ~/aofl/schools.abcmouse.jp/ && aofljs-cli server -d -p 3001 -H schools.localhost.com -m jp'
-alias twserver='cd ~/aofl/schools.abcmouse.tw/ && aofljs-cli server -d -p 3001 -H schools.localhost.com -m tw'
-alias emscomserver='cd ~/aofl/ems.abcmouse.com/ && aofljs-cli server -d -p 3001 -H ems.localhost.com -m com'
-alias emsjpserver='cd ~/aofl/ems.abcmouse.jp/ && aofljs-cli server -d -p 3001 -H ems.localhost.com -m jp'
-alias parentwserver='cd ~/aofl/parent.abcmouse.tw/ && aofljs-cli server -d -p 3001 -H schools.localhost.abcmouse.com -m tw'
-alias build='aofljs-cli build -r -v'
-
-alias webserver='docker exec -it readingiq_private_web_server /bin/bash'
-alias lbtwebserver='docker exec -it library_tool_web_server /bin/bash'
-
-alias riq='cd ~/aofl/ReadingIq'
-alias riqprivate='cd ~/aofl/ReadingIq/ReadingIqPrivate'
-alias library='cd ~/aofl/ReadingIq/ReadingIqPrivate/www-data/ReadingIqServiceLibrary'
-alias layer='cd ~/aofl/ReadingIq/ReadingIqPrivate/www-data/ReadingIqServiceLayer'
-alias filecache='cd ~/aofl/ReadingIq/ReadingIqPrivate/ReadingIqFileCache'
-alias cdn='cd ~/aofl/ReadingIq/ReadingIqPrivate/ReadingIqCdn'
-alias sql='cd ~/aofl/ReadingIq/ReadingIqPrivate/ReadingIqSql'
-alias web='cd ~/aofl/ReadingIq/ReadingIqPrivate/private.readingiq.com'
-
-alias buildtw='aofljs-cli build-app ems_enterprise/ -o ems4/ -m tw'
-alias buildjp='aofljs-cli build-app schools_experience_jp/ -o globalschools/ -m jp'
-
-alias sandbox='ssh brooke.fox@brooke.fox.test.abcmouse.com'
-alias lbt='ssh lbt-dev.aofl.com'
-alias lbt2='ssh lbt2-dev.aofl.com'
-alias uninstallaofljs-cli='npm uninstall -g @aofl/aofljs-cli'
-alias 061install='npm i -g @aofl/aofljs-cli@0.6.1'
-alias 065install='npm i -g @aofl/aofljs-cli@0.6.5'
-alias 0511install='npm i -g @aofl/aofljs-cli@0.5.11'
-alias openaofljscli='atom /usr/local/lib/node_modules/@aofl/aofljs-cli/commands/build-app/index.js'
-alias revertminfiles='git checkout origin/master -- **/*.min.* && git checkout origin/master -- riq_frame_com_en/header/index.min.js && git checkout origin/master -- riq_frame_com_en/header/index.min.js.map && git checkout origin/master -- js/riq-js/riq-js.min.js && git checkout origin/master -- js/riq-js/riq-js.min.js.map'
-
-# AofL container aliases
-# Requires that the command be run in the folder
-# that do/ folder is in
-alias dorun='do/env run dev Dockerfolder/dev/do_config/'
-alias dostop='do/env stop dev Dockerfolder/dev/do_config/'
-alias dorm='do/env stop dev Dockerfolder/dev/do_config/ rm'
-alias dopull='do/repo pull dev Dockerfolder/dev/do_config/'
-alias dologin='do/repo login dev Dockerfolder/dev/do_config/'
-
 export PATH=/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:$PATH
 export EDITOR='atom -w'
 export PATH=$PATH:~/aofl/flutter/bin
