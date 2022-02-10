@@ -7,7 +7,7 @@ do
         c) command=${OPTARG};;
         b) branch=${OPTARG};;
         t) tag=${OPTARG};;
-        *) echo "Invalid option: -$flag. flags are -d (directory), -c (command), -b (branch), -t (tag). commands are checkout-master, composer-update, cut-new-branch, checkout-branch, stash, build-docker-image"; exit 0 ;;
+        *) echo "Invalid option: -$flag. flags are -d (directory), -c (command), -b (branch), -t (tag). commands are checkout-master, checkout-main, composer-update, cut-new-branch, checkout-branch, stash, build-docker-image, clear-logs"; exit 0 ;;
     esac
 done
 
@@ -16,11 +16,19 @@ if [ -z "$directory" ]; then
 fi
 
 for d in $directory/*/ ; do
-    echo "$d"
+    if [[ $d != *-service/ ]]; then
+      echo "skipping $d"
+      continue
+    fi
+    echo "changing to $d"
     cd "$d"
     if [ "$command" == "checkout-master" ]; then
       echo "checking out, pulling, fetching master"
       git com
+      git u
+    elif [ "$command" == "checkout-main" ]; then
+      echo "checking out, pulling, fetching main"
+      git co main
       git u
     elif [ "$command" == "composer-update" ]; then
       echo "updating composer packages"
@@ -35,19 +43,18 @@ for d in $directory/*/ ; do
     elif [ "$command" == "stash" ]; then
       echo "stashing"
       git stash
-    elif [ "$command" == "clear-logs" ]; then
-      echo "removing and recreating log files"
-      rm logs/php/php-fpm.log && touch logs/php/php-fpm.log
-      rm logs/nginx/access.log && touch logs/nginx/access.log
-      rm logs/nginx/error.log && touch logs/nginx/error.log
     elif [ "$command" == "build-docker-image" ]; then
       repo="$( basename "$PWD" )"
       echo "updating composer packages"
       composer update
       echo "building new docker tag $repo/web-server:$tag"
       docker build -t "$repo/web-server:$tag" -f Dockerfile .
-      docker tag "$repo/web-server:$tag" gitlab.aofl.com:5001/abcmouse-international/"$repo/web-server:$tag"
-      docker push gitlab.aofl.com:5001/abcmouse-international/"$repo/web-server:$tag"
+    elif [ "$command" == "clear-logs" ]; then
+      echo "clearing php logs"
+      rm logs/php/php-fpm.log && touch logs/php/php-fpm.log
+      echo "clearing nginx logs"
+      rm logs/nginx/access.log && touch logs/nginx/access.log
+      rm logs/nginx/error.log && touch logs/nginx/error.log
     else
       echo "$command is not a valid command"
       exit 1
