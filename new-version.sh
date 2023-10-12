@@ -9,7 +9,12 @@ checkout_default_branch() {
 
 increment_version() {
   version=$1
-  version="${version:1}"
+  prefix=""
+  if [[ "$version" == v* ]]; then
+    prefix="v"
+  fi
+  version=${version#"release/"}
+  version=${version#"v"}
   local delimiter=.
   local array=($(echo "$version" | tr $delimiter '\n'))
   if [[ "$2" == 'patch' ]]; then
@@ -25,7 +30,8 @@ increment_version() {
     echo "$2 is not a valid version increment"
     exit 1
   fi
-  echo $(local IFS=$delimiter ; echo "v${array[*]}")
+
+  echo $(local IFS=$delimiter ; echo "${prefix}${array[*]}")
 }
 
 while getopts v:m:b: FLAG
@@ -61,8 +67,25 @@ fi
 echo "fetching all tags"
 git fetch --all --tags
 
-CURRENT_TAG=$(git tag --list v* | sort -r --version-sort | head -n1)
+MOST_RECENT_TAG=$(git tag --sort=-creatordate | head -n 1)
+USES_LEADING_V="true"
+if [[ "$MOST_RECENT_TAG" != v* ]]; then
+  USES_LEADING_V="false"
+fi
+
+if [[ "$USES_LEADING_V" == "true" ]]; then
+  CURRENT_TAG=$(git tag --list | sort -r --version-sort | head -n1)
+else
+  CURRENT_TAG=$(git describe --tags --abbrev=0 --match "[0-9]*.[0-9]*.[0-9]*" $(git rev-list --tags --max-count=1))
+fi
+if [[ -z "$CURRENT_TAG" ]]; then
+  echo "cannot find current tag. exiting..."; exit 1;
+fi
+
 NEXT_TAG=$(increment_version ${CURRENT_TAG} ${VERSION})
+if [[ -z "$NEXT_TAG" ]]; then
+  echo "cannot find next tag. exiting..."; exit 1;
+fi
 
 read -t 10 -p "CURRENT_TAG is ${CURRENT_TAG}, incrementing the ${VERSION} version to ${NEXT_TAG}. Continue (y/N)? " answer
 if [[ "${answer}" == "y" || "${answer}" == "yes" ]]; then
